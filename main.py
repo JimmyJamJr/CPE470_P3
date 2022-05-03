@@ -15,9 +15,26 @@ n=2 # Number of dimensions
 delta_t_update = 0.008
 
 rng = default_rng()
-nodes = rng.uniform(low=0.01, high=0.99, size=(num_nodes, n))
+nodes = rng.uniform(low=0, high=1, size=(num_nodes, n))
 # Add measurement for each node: yi= theta + v_i, or : mi= theta + v_i
 nodes_va = 50. * np.ones(shape=(num_nodes, 1)) + 1 * rng.normal(size=(num_nodes, n))
 nodes_va0 = nodes_va
 
-find_neighbors(nodes, r, n, delta_t_update)
+nodes_va_old = nodes_va
+Nei_agent, A = find_neighbors(nodes, r, n, delta_t_update)
+
+print(Nei_agent)
+
+plt.plot(nodes[:,0], nodes[:,1])
+plt.show()
+
+iterations = 80
+Con = []
+for i in range(iterations):
+    # Compute Metropolis weights
+    # Compute vertex and edge weights
+    break
+
+
+def metropolis_weights():
+    return 0

@@ -22,7 +22,6 @@ def find_neighbors(nodes, r, n, delta_t_update):
         out.ravel()[:len(indices)] = indices
         Nei_agent[k] = out
 
-
     A = np.zeros(shape=(10, 10))
     for i in range(num_nodes):
         Nei_nodes = nodes[Nei_agent[i][~np.isnan(Nei_agent[i])].ravel().astype(int), :]
