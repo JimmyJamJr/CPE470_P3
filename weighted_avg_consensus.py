@@ -53,7 +53,7 @@ def get_weight_two(i, j, N):
         return 0
 
 
-iterations = 10
+iterations = 80
 x = np.zeros(shape=(iterations, num_nodes))
 x[0] = m
 for i in range(1, iterations):
