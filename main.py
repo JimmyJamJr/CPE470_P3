@@ -28,13 +28,14 @@ print(Nei_agent)
 plt.plot(nodes[:,0], nodes[:,1])
 plt.show()
 
-iterations = 80
-Con = []
-for i in range(iterations):
-    # Compute Metropolis weights
-    # Compute vertex and edge weights
-    break
-
-
-def metropolis_weights():
-    return 0
+# iterations = 80
+# Con = []
+# for i in range(iterations):
+#     # Compute Metropolis weights
+#     # Compute vertex and edge weights
+#     break
+#
+#
+# def metropolis_weights():
+#
+#     return 0

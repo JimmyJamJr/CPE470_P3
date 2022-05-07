@@ -2,7 +2,7 @@ import numpy as np
 import numpy.linalg
 
 
-def find_neighbors(nodes, r, n, delta_t_update):
+def find_neighbors(nodes, r, n):
     num_nodes = nodes.shape[0]
     dif = np.zeros(shape=(num_nodes, num_nodes, n))
     distance_alpha = np.zeros(shape=(num_nodes,num_nodes))
