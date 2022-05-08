@@ -17,12 +17,12 @@ def find_neighbors(nodes, r, n):
         distance_alpha[i,:] = d_tmp.ravel()
 
     for k in range(num_nodes):
-        out = np.full((9,1), np.nan)
+        out = np.full((num_nodes - 1, 1), np.nan)
         indices = np.nonzero(np.logical_and(distance_alpha[:,k] < r, distance_alpha[:,k] != 0.))[0]
         out.ravel()[:len(indices)] = indices
         Nei_agent[k] = out
 
-    A = np.zeros(shape=(10, 10))
+    A = np.zeros(shape=(num_nodes, num_nodes))
     for i in range(num_nodes):
         Nei_nodes = nodes[Nei_agent[i][~np.isnan(Nei_agent[i])].ravel().astype(int), :]
         for j in range(num_nodes):
