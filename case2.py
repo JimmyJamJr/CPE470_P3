@@ -40,15 +40,20 @@ rng = default_rng()
 nodes = rng.uniform(low=-6, high=6, size=(num_nodes, 2))
 
 
+# Get observability of node i for cell kr, kc
 def get_observability(i, kr, kc):
     if np.linalg.norm(nodes[i] - np.array([field[kr, kc, 0], field[kr, kc, 1]])) <= rs:
         return 1
     else:
         return 0
 
+
+# Get noise variance of node i for cell kr, kc
 def get_v(i, kr, kc):
     return (np.linalg.norm(nodes[i] - [field[kr, kc, 0], field[kr, kc, 1]]) ** 2 + cv) / (rs ** 2)
 
+
+# Get measured value of node i for cell kr, kc
 def get_m(i, kr, kc):
     return get_observability(i, kr, kc) * (field[kr, kc, 2] + rng.normal(0, get_v(i, kr, kc)))
 
@@ -89,6 +94,8 @@ for i in range(1, iterations):
                     sum += get_weight_one(n, n1, neighbors[n], r, c) * x[i - 1][n1][r][c]
                 x[i][n][r][c] = get_weight_one(n, n, neighbors[n], r, c) * x[i-1][n][r][c] + sum
 
+
+# Average out the observed value between all the nodes
 x_avg = np.zeros(shape=(25, 25))
 for n in range(num_nodes):
     x_avg += x[iterations-1][n]
