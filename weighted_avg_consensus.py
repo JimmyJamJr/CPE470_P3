@@ -9,14 +9,20 @@ import numpy.linalg
 
 from find_neighbors import find_neighbors
 
+# Parameters
 r = 17
 rs = 4
-cv = 0.01
+cv = 0.02
 num_nodes = 10
 F = 50
 
 rng = default_rng()
 nodes = rng.uniform(low=0, high=4, size=(num_nodes, 2))
+
+# Show network
+# plt.plot(nodes[:,0], nodes[:,1], marker="o", linestyle="None")
+# plt.title("Network with 10 nodes")
+# plt.show()
 
 # Avg position of nodes
 q = np.sum(nodes, axis=0) / 10.
@@ -53,7 +59,8 @@ def get_weight_two(i, j, N):
         return 0
 
 
-iterations = 80
+# Go through iterations, store results of iteration using filter 1 formula
+iterations = 1500
 x = np.zeros(shape=(iterations, num_nodes))
 x[0] = m
 for i in range(1, iterations):
@@ -65,17 +72,19 @@ for i in range(1, iterations):
     for n in range(num_nodes):
         sum = 0
         for n1 in neighbors[n]:
-            sum += get_weight_two(n, n1, neighbors[n]) * x[i - 1][n1]
-        x[i][n] = get_weight_two(n, n, neighbors[n]) * x[i-1][n] + sum
+            sum += get_weight_one(n, n1, neighbors[n]) * x[i - 1][n1]
+        x[i][n] = get_weight_one(n, n, neighbors[n]) * x[i-1][n] + sum
 
 mean = np.mean(x[0])
 y = [[x[i][n] - mean for i in range(iterations)] for n in range(num_nodes)]
 # for n in range(num_nodes):
 #     plt.plot(range(iterations), y[n])
+# plt.xlabel("Iterations")
 
 plt.plot(range(num_nodes), [x[0][n] for n in range(num_nodes)], label="Initial")
 plt.plot(range(num_nodes), [x[iterations-1][n] for n in range(num_nodes)], label="Final")
 plt.legend()
+plt.xlabel("Nodes")
 plt.show()
 
 
